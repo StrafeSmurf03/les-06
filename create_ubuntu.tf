@@ -155,5 +155,5 @@ resource "local_file" "outputs" {
     become_passwd=
     ansible_ssh_common_args='-o StrictHostKeyChecking=no'
   EOT
-  filename = "${path.module}/inventory.ini"
+  filename = "${path.module}/ansible/inventory.ini"
 }
