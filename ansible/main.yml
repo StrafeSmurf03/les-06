@@ -9,7 +9,7 @@
   hosts: servers
   become: yes
   vars:
-    local_file: "/docker/docker-compose.yaml"
+    local_file: "docker/docker-compose.yaml"
     remote_path: "/home/testuser/docker-compose.yaml"  
   tasks:
     - name: Kopiëren van bestand
