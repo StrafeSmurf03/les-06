@@ -1,0 +1,69 @@
+---
+# tasks file for ansible-role-docker
+- name: Install docker packages
+  remote_user: ubuntu
+  apt:
+    name: 
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+
+- name: Add Docker s official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+
+
+- name: Verify that we have the key with the fingerprint
+  apt_key:
+    id: 0EBFCD88
+    state: present
+
+- name: Set up the stable repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+    state: present
+
+- name: Update apt packages
+  apt:
+    update_cache: yes
+
+- name: Install docker
+  remote_user: ubuntu
+  apt:
+    name: 
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+    update_cache: yes
+
+- name: Ensure docker service is running
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: wait for docker.sock
+  ansible.builtin.wait_for:
+    path: /var/run/docker.sock
+    state: present
+    timeout: 30 
+
+- name: Add remote "testuser" user to "docker" group
+  user:
+    name: testuser
+    group: docker
+    append: yes
+
+- name: Install docker-compose
+  get_url: 
+    url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 'u+x,g+x'
+
+- name: Ensure docker-compose is enabled
+  ansible.builtin.systemd:
+    name: docker-compose
+    state: started
+    enabled: yes
