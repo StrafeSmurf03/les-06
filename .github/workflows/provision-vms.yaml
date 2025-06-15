@@ -50,8 +50,8 @@ jobs:
       - name: upload inventory as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: inventory
-          path: inventory.ini
+          name: ansible_inventory
+          path: ansible/inventory.ini
 
   ansible:
     needs: build
@@ -64,8 +64,8 @@ jobs:
       - name: Download inventory artifact
         uses: actions/download-artifact@v4
         with:
-          name: inventory
-          path: inventory.ini
+          name: ansible_inventory
+          path: ansible
 
       - name: Set up Python
         uses: actions/setup-python@v4
