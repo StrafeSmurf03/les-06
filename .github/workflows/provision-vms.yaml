@@ -30,6 +30,7 @@ jobs:
           mv ovftool vmware-ovftool
           mv --backup=numbered vmware-ovftool /usr/bin/
           chmod +x /usr/bin/vmware-ovftool/ovftool*
+          ln -s /usr/bin/ovftool /usr/bin/vmware-ovftool/ovftool 
 
       - name: Terraform Init
         run: terraform init
