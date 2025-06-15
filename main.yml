@@ -1,0 +1,6 @@
+- name: Configure Docker all hosts
+  hosts: dockerservers
+  become: true
+  gather_facts: false
+  roles:
+    - ansible-role-docker

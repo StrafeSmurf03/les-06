@@ -1,0 +1,6 @@
+resource_group_name = "S1204419"
+prefix = "ubuntu"
+location = "West Europe"
+vm_size = "Standard_B2ats_v2"
+ssh_username = "testuser"
+ssh_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMIJc6eOKRMaaMbr+7SE3ELTk924IOO4sjHApXz1IZiS"
