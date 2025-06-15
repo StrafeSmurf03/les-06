@@ -18,3 +18,8 @@
         src: "{{ local_file }}"
         dest: "{{ remote_path }}"
         mode: '0644'
+
+    - name: Deploy Docker container
+      become: yes
+      command: |
+        docker-compose -f /home/testuser/docker-compose.yaml up -d
