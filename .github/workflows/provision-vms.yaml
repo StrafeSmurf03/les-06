@@ -44,7 +44,7 @@ jobs:
         run: terraform apply -auto-approve
 
   ansible:
-    needs: Terraform Apply
+    needs: build
     name: Install Docker and Deploy Container
     runs-on: self-hosted
     steps:
