@@ -9,6 +9,7 @@ on:
       - terraform/**/*.tf
       - terraform/**/*.tfvars
       - terraform/**/*.tftpl
+
   workflow_dispatch:
 
 jobs:
@@ -43,6 +44,12 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve
 
+      - name: upload inventory as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: inventory.ini
+          path: inventory.ini
+
   ansible:
     needs: build
     name: Install Docker and Deploy Container
@@ -50,6 +57,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download inventory artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: inventory.ini
+          path: inventory.ini
 
       - name: Set up Python
         uses: actions/setup-python@v4
