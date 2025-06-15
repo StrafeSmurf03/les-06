@@ -1,12 +1,12 @@
 - name: Configure Docker all hosts
-  hosts: dockerservers
+  hosts: servers
   become: true
   gather_facts: false
   roles:
     - ansible-role-docker
 
 - name: Kopiëren docker-compose naar VM
-  hosts: dockerservers
+  hosts: servers
   become: yes
   vars:
     local_file: "/docker/docker-compose.yaml"
