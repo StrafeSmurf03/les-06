@@ -51,12 +51,15 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: inventory.ini
-          path: inventory.ini
+          path: ansible/inventory.ini
 
   ansible:
     needs: build
     name: Install Docker and Deploy Container
     runs-on: self-hosted
+    defaults:
+      run:
+        working-directory: ansible
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -65,7 +68,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: inventory.ini
-          path: inventory.ini
+          path: ansible
 
       - name: Set up Python
         uses: actions/setup-python@v4

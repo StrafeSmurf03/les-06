@@ -153,6 +153,7 @@ resource "local_file" "outputs" {
     ansible_ssh_user= ${var.ssh_username}
     ansible_ssh_private_key_file=/home/gebruiker/id_ed25519
     become_passwd=
+    ansible_ssh_common_args='-o StrictHostKeyChecking=no'
   EOT
   filename = "${path.module}/inventory.ini"
 }
