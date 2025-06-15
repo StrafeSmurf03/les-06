@@ -62,8 +62,3 @@
     dest: /usr/local/bin/docker-compose
     mode: 'u+x,g+x'
 
-- name: Ensure docker-compose is enabled
-  ansible.builtin.systemd:
-    name: docker-compose
-    state: started
-    enabled: yes
