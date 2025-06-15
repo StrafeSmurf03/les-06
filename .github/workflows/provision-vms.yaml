@@ -26,6 +26,8 @@ jobs:
       - name: Install ovftool
         run: |
           rm -rf /usr/bin/vmware-ovftool/ovftool
+          rm -rf /usr/bin/vmware-ovftool
+          rm -rf /usr/bin/ovftool
           wget https://github.com/rgl/ovftool-binaries/raw/main/archive/VMware-ovftool-4.6.3-24031167-lin.x86_64.zip
           unzip VMware-ovftool-4.6.3-24031167-lin.x86_64.zip
           mv ovftool vmware-ovftool
