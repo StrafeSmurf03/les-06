@@ -1,5 +1,9 @@
 name: Provisioning VMs with Terraform
 
+stages:
+  - build
+  - deploy
+
 on:
   push:
     branches:
@@ -12,6 +16,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  stage: build
   build:
     name: Terraform Apply
     runs-on: self-hosted
@@ -44,6 +49,7 @@ jobs:
         run: terraform apply -auto-approve
 
   ansible:
+    stage: deploy
     name: Install Docker and Deploy Container
     runs-on: self-hosted
     steps:
