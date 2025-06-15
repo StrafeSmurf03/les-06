@@ -4,3 +4,17 @@
   gather_facts: false
   roles:
     - ansible-role-docker
+
+- name: Kopiëren docker-compose naar VM
+  hosts: dockerservers
+  become: yes
+  vars:
+    local_file: "/docker/docker-compose.yaml"
+    remote_path: "/home/testuser/docker-compose.yaml"  
+  tasks:
+    - name: Kopiëren van bestand
+      become: yes
+      copy:
+        src: "{{ local_file }}"
+        dest: "{{ remote_path }}"
+        mode: '0644'
